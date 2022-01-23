@@ -8,12 +8,12 @@ export class AppTextarea {
   @Prop() placeholder: string = '';
   @Prop() btText: string = '';
 
-  @State() text: string = '';
-  @State() validate: boolean = true;
+  @State() private text: string = '';
+  @State() private validate: boolean = true;
 
-  @Event() clicked: EventEmitter;
+  @Event() private clicked: EventEmitter;
 
-  textInput(el) {
+  private textInput(el) {
     this.text = el.srcElement.value;
     if (0 <= this.text.length && this.text.length <= 140) {
       this.validate = false;
@@ -22,7 +22,7 @@ export class AppTextarea {
     }
   }
 
-  async send() {
+  private async send() {
     this.clicked.emit(this.text);
   }
 

@@ -1,4 +1,4 @@
-import { h, Component, State, Prop } from '@stencil/core';
+import { h, Component, State } from '@stencil/core';
 import { UserProvider } from '../../providers/user';
 
 @Component({
@@ -7,13 +7,12 @@ import { UserProvider } from '../../providers/user';
 })
 export class UsersPage {
   @State() users: any = [];
-  @Prop() userId: string = '';
 
   componentWillLoad() {
     this.getUserList();
   }
 
-  async getUserList(createdAt: Date = new Date()) {
+  private async getUserList(createdAt: Date = new Date()) {
     const res = await UserProvider.getUserList(createdAt);
     if (res) {
       if (createdAt) {
@@ -24,12 +23,12 @@ export class UsersPage {
     }
   }
 
-  async doRefresh(ev: any) {
+  private async doRefresh(ev: any) {
     this.users = [];
     await this.getUserList();
     ev.target.complete();
   }
-  async loadData(ev) {
+  private async loadData(ev) {
     if (this.users.length > 0) {
       if (this.users.length > 1) {
         const createdAt = this.users[this.users.length - 1].createdAt;

@@ -12,14 +12,13 @@ import { getTwitterLink } from '../../helpers/utils';
   styleUrl: 'page-message.scss',
 })
 export class MessagePage {
-  @State() loginUser: any = null;
-  @State() user: IUser = null;
-  @State() message: IMessage;
-  @State() text: string = '';
-  @State() twitterLink: string = '#';
-
   @Prop() userId: string;
   @Prop() messageId: string;
+
+  @State() private loginUser: any = null;
+  @State() private user: IUser = null;
+  @State() private message: IMessage;
+  @State() private twitterLink: string = '#';
 
   componentWillLoad() {
     this.loggedIn();
@@ -30,10 +29,10 @@ export class MessagePage {
     this.getUser();
   }
 
-  async loggedIn() {
+  private async loggedIn() {
     this.loginUser = await AuthProvider.loggedIn();
   }
-  async send(ev) {
+  private async send(ev) {
     if (ev && ev.detail) {
       const loading = await loadingController.create({
         message: '送信中',
@@ -52,14 +51,13 @@ export class MessagePage {
     }
   }
 
-  async getUser() {
+  private async getUser() {
     this.user = await UserProvider.getUser(this.userId);
   }
 
-  async getMessage() {
+  private async getMessage() {
     this.message = await MessageProvider.get(this.userId, this.messageId);
     if (this.message && this.message.answer) {
-      this.text = this.message.answer;
       this.twitterLink = getTwitterLink('/messages/' + this.userId + '/' + this.messageId);
     }
   }

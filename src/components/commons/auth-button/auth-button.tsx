@@ -1,23 +1,23 @@
-import { h, Component, State } from "@stencil/core";
-import { AuthProvider } from "../../../providers/auth";
+import { h, Component, State } from '@stencil/core';
+import { AuthProvider } from '../../../providers/auth';
 
 @Component({
-  tag: "auth-button",
-  styleUrl: "auth-button.scss",
+  tag: 'auth-button',
+  styleUrl: 'auth-button.scss',
 })
 export class AuthButtonComponent {
-  @State() loginUser: any = null;
-  @State() fetched: boolean = false;
+  @State() private loginUser: any = null;
+  @State() private fetched: boolean = false;
 
   componentWillLoad() {
     this.loggedIn();
   }
 
-  async login() {
+  private async login() {
     AuthProvider.login();
   }
 
-  async loggedIn() {
+  private async loggedIn() {
     this.loginUser = await AuthProvider.loggedIn();
     this.fetched = true;
   }
@@ -34,9 +34,7 @@ export class AuthButtonComponent {
                 </ion-button>,
               ];
             } else {
-              return [
-                <ion-button onClick={() => this.login()}>ログイン</ion-button>,
-              ];
+              return [<ion-button onClick={() => this.login()}>ログイン</ion-button>];
             }
           }
         })()}

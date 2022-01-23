@@ -9,17 +9,17 @@ import { IMessage, initMessage } from '../../interfaces/message';
   styleUrl: 'page-home.scss',
 })
 export class PageHome {
-  @State() loginUser: any = null;
+  @State() private loginUser: any = null;
 
   componentWillLoad() {
     this.loggedIn();
   }
 
-  async loggedIn() {
+  private async loggedIn() {
     this.loginUser = await AuthProvider.loggedIn();
   }
 
-  async send(ev) {
+  private async send(ev) {
     if (ev && ev.detail) {
       const loading = await loadingController.create({
         message: '送信中',

@@ -30,7 +30,6 @@ export namespace Components {
         "userId": string;
     }
     interface PageUsers {
-        "userId": string;
     }
     interface UserProfile {
         "image": string;
@@ -146,7 +145,6 @@ declare namespace LocalJSX {
         "userId"?: string;
     }
     interface PageUsers {
-        "userId"?: string;
     }
     interface UserProfile {
         "image"?: string;

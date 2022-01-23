@@ -7,19 +7,19 @@ import { toastController } from '@ionic/core';
   styleUrl: 'page-setting.scss',
 })
 export class SettingPage {
-  @State() loginUser: any = null;
-  @State() disabled: boolean = false;
-  textInput!: HTMLInputElement;
+  @State() private loginUser: any = null;
+  @State() private disabled: boolean = false;
+  private textInput!: HTMLInputElement;
 
   componentWillLoad() {
     this.loggedIn();
   }
 
-  async loggedIn() {
+  private async loggedIn() {
     this.loginUser = await AuthProvider.loggedIn();
   }
 
-  async save() {
+  private async save() {
     this.disabled = true;
     await AuthProvider.updateName(this.loginUser.uid, this.textInput.value);
     const toast = await toastController.create({
@@ -31,7 +31,7 @@ export class SettingPage {
     this.disabled = false;
   }
 
-  async logout() {
+  private async logout() {
     AuthProvider.logout();
   }
 
@@ -76,4 +76,3 @@ export class SettingPage {
     ];
   }
 }
-

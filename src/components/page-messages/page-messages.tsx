@@ -9,19 +9,19 @@ import { formatDate } from '../../helpers/firebase';
   styleUrl: 'page-messages.scss',
 })
 export class MessagesPage {
-  @State() loginUser: any = null;
-  @State() messages: IMessage[] = [];
+  @State() private loginUser: any = null;
+  @State() private messages: IMessage[] = [];
 
   componentWillLoad() {
     this.loggedIn();
   }
 
-  async loggedIn() {
+  private async loggedIn() {
     this.loginUser = await AuthProvider.loggedIn();
     this.getList();
   }
 
-  async getList(createdAt: Date = new Date()) {
+  private async getList(createdAt: Date = new Date()) {
     const res = await MessageProvider.getMessageList(this.loginUser.uid, createdAt);
     if (res) {
       if (createdAt) {
@@ -32,13 +32,13 @@ export class MessagesPage {
     }
   }
 
-  async doRefresh(ev: any) {
+  private async doRefresh(ev: any) {
     this.messages = [];
     await this.getList();
     ev.target.complete();
   }
 
-  async loadData(ev) {
+  private async loadData(ev) {
     if (this.messages.length > 0) {
       if (this.messages.length > 1) {
         const createdAt = this.messages[this.messages.length - 1].createdAt;

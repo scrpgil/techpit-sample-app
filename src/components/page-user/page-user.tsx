@@ -10,25 +10,19 @@ import { IUser } from '../../interfaces/user';
   styleUrl: 'page-user.scss',
 })
 export class UserPage {
-  @State() user: IUser = null;
-  @State() text: string = '';
-  @State() sended: boolean = false;
   @Prop() userId: string = '';
+  @State() private user: IUser = null;
   @Element() el: HTMLElement;
-
-  textInput(el) {
-    this.text = el.srcElement.value;
-  }
 
   componentWillLoad() {
     this.getUser();
   }
 
-  async getUser() {
+  private async getUser() {
     this.user = await UserProvider.getUser(this.userId);
   }
 
-  async send(ev) {
+  private async send(ev) {
     if (ev && ev.detail) {
       const loading = await loadingController.create({
         message: '送信中',
