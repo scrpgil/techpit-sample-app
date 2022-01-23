@@ -1,0 +1,25 @@
+{
+  "name": "sample-app",
+  "private": true,
+  "version": "0.0.1",
+  "description": "sample-app",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watch",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@ionic/core": "^6.0.3",
+    "@stencil/core": "^2.12.1",
+    "@stencil/sass": "^1.5.2"
+  },
+  "dependencies": {
+    "firebase": "^8.10.0"
+  }
+}
